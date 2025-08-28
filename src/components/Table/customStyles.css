@@ -1,0 +1,10 @@
+/* Ẩn biểu tượng mặc định cho input date */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none; /* Ẩn biểu tượng cho Chrome/Safari */
+}
+
+input[type="date"] {
+    -moz-appearance: textfield; /* Ẩn biểu tượng cho Firefox */
+    position: relative; /* Để đặt các phần tử con */
+    background: transparent; /* Nền trong suốt */
+}
