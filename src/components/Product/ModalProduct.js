@@ -23,7 +23,9 @@ const ModalProduct = (props) => {
 
   const fetchCategory = async () => {
     try {
-      const req = await fetch(`http://localhost:8080/api/admin/category`);
+      const req = await fetch(
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category`
+      );
       const res = await req.json();
       if (res.succes) setCategory(res.category);
       else console.log("fetchCategory succes: false");
@@ -69,7 +71,7 @@ const ModalProduct = (props) => {
     };
     try {
       const req = await fetch(
-        `http://localhost:8080/api/admin/product${
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/product${
           type === "update" ? `/${data.id}` : ""
         }`,
         {
@@ -106,10 +108,13 @@ const ModalProduct = (props) => {
     // Gửi yêu cầu POST đến API
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:8080/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://ecommerce-coolmate-server-production.up.railway.app/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const data = await response.json();
       if (data) setIsLoading(false);

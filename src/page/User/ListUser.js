@@ -31,7 +31,7 @@ const ListUser = () => {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/admin/user?sort=customer",
+        "https://ecommerce-coolmate-server-production.up.railway.app/api/admin/user?sort=customer",
         {
           withCredentials: true,
         }
@@ -67,7 +67,7 @@ const ListUser = () => {
       const newPassword = "123456";
 
       const response = await axios.put(
-        `http://localhost:8080/api/admin/user/${row.id}`,
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/user/${row.id}`,
         { password: newPassword },
         {
           withCredentials: true,

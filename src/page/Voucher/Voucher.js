@@ -9,7 +9,7 @@ const Voucher = () => {
   const fetchVoucher = async () => {
     try {
       const req = await fetch(
-        `http://localhost:8080/api/admin/voucher${
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/voucher${
           status ? `?status=${status}` : ""
         }`
       );
@@ -39,7 +39,7 @@ const Voucher = () => {
     if (newStatus) {
       try {
         const response = await axios.put(
-          `http://localhost:8080/api/admin/voucher/${selectedVoucher.id}/status`,
+          `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/voucher/${selectedVoucher.id}/status`,
           { status: newStatus },
           { withCredentials: true }
         );

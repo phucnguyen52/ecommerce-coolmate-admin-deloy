@@ -49,7 +49,7 @@ const ListProduct = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/customer/product?sort=price&page=1&type=DESC&max=1000000&min=0",
+        "https://ecommerce-coolmate-server-production.up.railway.app/api/customer/product?sort=price&page=1&type=DESC&max=1000000&min=0",
         {
           withCredentials: true,
         }
@@ -74,7 +74,7 @@ const ListProduct = () => {
     event.stopPropagation();
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/admin/product/${row.id}`,
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/product/${row.id}`,
         {
           withCredentials: true,
         }

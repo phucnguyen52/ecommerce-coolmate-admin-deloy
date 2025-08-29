@@ -11,7 +11,7 @@ const StoreReceipt = () => {
   const fetchProviders = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/admin/provider",
+        "https://ecommerce-coolmate-server-production.up.railway.app/api/admin/provider",
         {
           withCredentials: true,
         }
@@ -49,7 +49,7 @@ const StoreReceipt = () => {
     setSelectedVariant(null);
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/customer/search?search=${key}`,
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/search?search=${key}`,
         {
           withCredentials: true,
         }
@@ -68,7 +68,7 @@ const StoreReceipt = () => {
     setShowSearchResults(false);
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/customer/product/${product.id}/detail`,
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/product/${product.id}/detail`,
         {
           withCredentials: true,
         }
@@ -127,7 +127,7 @@ const StoreReceipt = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/admin/store",
+        "https://ecommerce-coolmate-server-production.up.railway.app/api/admin/store",
         requestBody,
         {
           withCredentials: true,

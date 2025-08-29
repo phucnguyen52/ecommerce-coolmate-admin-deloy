@@ -15,7 +15,9 @@ const CreateVoucher = () => {
 
   const fetchCategory = async () => {
     try {
-      const req = await fetch(`http://localhost:8080/api/admin/category`);
+      const req = await fetch(
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category`
+      );
       const res = await req.json();
       if (res.succes) {
         setCategories(res.category);
@@ -27,7 +29,7 @@ const CreateVoucher = () => {
   const fetchUser = async (search) => {
     try {
       const req = await fetch(
-        `http://localhost:8080/api/admin/user/search?search=${search}`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/user/search?search=${search}`
       );
       const res = await req.json();
       if (res.success) {
@@ -103,7 +105,7 @@ const CreateVoucher = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/admin/voucher",
+        "https://ecommerce-coolmate-server-production.up.railway.app/api/admin/voucher",
         voucher,
         {
           withCredentials: true,

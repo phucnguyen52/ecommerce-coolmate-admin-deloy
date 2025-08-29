@@ -16,7 +16,7 @@ const ListProvider = () => {
   const fetchProviders = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/admin/provider",
+        "https://ecommerce-coolmate-server-production.up.railway.app/api/admin/provider",
         {
           withCredentials: true,
         }
@@ -77,7 +77,7 @@ const ListProvider = () => {
     event.stopPropagation();
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/admin/provider/${row.id}`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/provider/${row.id}`
       );
       if (response.data.succes) {
         fetchProviders();

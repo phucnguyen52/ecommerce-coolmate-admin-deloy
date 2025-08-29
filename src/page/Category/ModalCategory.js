@@ -48,7 +48,7 @@ const ModalCategory = (props) => {
     };
     try {
       const req = await fetch(
-        `http://localhost:8080/api/admin/category${
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category${
           type === "update" ? `/${data.id}` : ""
         }`,
         {
@@ -83,10 +83,13 @@ const ModalCategory = (props) => {
     formData.append("images", file);
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:8080/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://ecommerce-coolmate-server-production.up.railway.app/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
       const data = await response.json();
       if (data) setIsLoading(false);
       setImageUrl(data[0]);

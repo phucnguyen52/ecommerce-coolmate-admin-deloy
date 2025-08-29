@@ -40,7 +40,7 @@ const ListOrder = () => {
     if (startDate && endDate) {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/admin/order?start='${startDate}'&end='${endDate}'`,
+          `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/order?start='${startDate}'&end='${endDate}'`,
           {
             withCredentials: true,
           }
@@ -95,7 +95,7 @@ const ListOrder = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/customer/order/${row.order_id}`,
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/order/${row.order_id}`,
         {
           statusOrder: statusOrderId,
         }

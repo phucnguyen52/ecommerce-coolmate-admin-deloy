@@ -148,7 +148,7 @@ const ModalAdd = ({
   const handleAddProvider = async (supplierInfo) => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/admin/provider",
+        "https://ecommerce-coolmate-server-production.up.railway.app/api/admin/provider",
         {
           address: supplierInfo.address,
           numberPhone: supplierInfo.phone,
@@ -195,7 +195,7 @@ const ModalAdd = ({
       if (supplierInfo.name) dataToUpdate.fullname = supplierInfo.name;
       try {
         const response = await axios.put(
-          `http://localhost:8080/api/admin/provider/${dataRow.id}`,
+          `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/provider/${dataRow.id}`,
           dataToUpdate,
           { withCredentials: true }
         );

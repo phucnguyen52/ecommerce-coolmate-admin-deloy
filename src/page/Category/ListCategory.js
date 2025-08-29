@@ -57,7 +57,7 @@ const ListCategory = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/admin/category",
+        "https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category",
         {
           withCredentials: true,
         }
@@ -84,7 +84,7 @@ const ListCategory = () => {
     event.stopPropagation();
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/admin/category/${row.id}`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category/${row.id}`
       );
       if (response.data.succes) {
         fetchCategories();

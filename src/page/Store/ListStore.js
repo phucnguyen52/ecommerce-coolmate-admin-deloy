@@ -42,7 +42,7 @@ const ListStore = () => {
     if (startDate && endDate) {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/admin/store?start='${startDate}'&end='${endDate}'`,
+          `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/store?start='${startDate}'&end='${endDate}'`,
           {
             withCredentials: true,
           }

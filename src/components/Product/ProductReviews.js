@@ -11,7 +11,9 @@ const ProductReviews = (props) => {
     : "";
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/products/${id}/ratings`)
+    fetch(
+      `https://ecommerce-coolmate-server-production.up.railway.app/api/products/${id}/ratings`
+    )
       .then((req) => req.json())
       .then((res) => {
         const count = res.rating.count;

@@ -35,7 +35,7 @@ const ListEmployee = () => {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/admin/user?sort=${selectedRole}`,
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/user?sort=${selectedRole}`,
         {
           withCredentials: true,
         }
@@ -71,7 +71,7 @@ const ListEmployee = () => {
       const newPassword = "123456";
 
       const response = await axios.put(
-        `http://localhost:8080/api/customer/${row.id}`,
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/${row.id}`,
         { password: newPassword },
         {
           withCredentials: true,
@@ -115,7 +115,7 @@ const ListEmployee = () => {
   const handleAddEmployee = async (newEmployee) => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/admin/user",
+        "https://ecommerce-coolmate-server-production.up.railway.app/api/admin/user",
         newEmployee,
         {
           withCredentials: true,
