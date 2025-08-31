@@ -11,7 +11,10 @@ const Voucher = () => {
       const req = await fetch(
         `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/voucher${
           status ? `?status=${status}` : ""
-        }`
+        }`,
+        {
+          credentials: "include",
+        }
       );
       const res = await req.json();
       if (res.success) {

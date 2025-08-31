@@ -84,7 +84,10 @@ const ListCategory = () => {
     event.stopPropagation();
     try {
       const response = await axios.delete(
-        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category/${row.id}`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category/${row.id}`,
+        {
+          withCredentials: true,
+        }
       );
       if (response.data.succes) {
         fetchCategories();

@@ -12,7 +12,10 @@ const ProductReviews = (props) => {
 
   useEffect(() => {
     fetch(
-      `https://ecommerce-coolmate-server-production.up.railway.app/api/products/${id}/ratings`
+      `https://ecommerce-coolmate-server-production.up.railway.app/api/products/${id}/ratings`,
+      {
+        credentials: "include",
+      }
     )
       .then((req) => req.json())
       .then((res) => {

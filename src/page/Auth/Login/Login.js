@@ -24,6 +24,9 @@ function Login() {
           {
             email: email,
             password: password,
+          },
+          {
+            withCredentials: true,
           }
         );
 

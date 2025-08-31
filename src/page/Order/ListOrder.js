@@ -98,6 +98,9 @@ const ListOrder = () => {
         `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/order/${row.order_id}`,
         {
           statusOrder: statusOrderId,
+        },
+        {
+          withCredentials: true,
         }
       );
 

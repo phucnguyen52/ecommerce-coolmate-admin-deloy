@@ -24,7 +24,10 @@ const ModalProduct = (props) => {
   const fetchCategory = async () => {
     try {
       const req = await fetch(
-        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category`,
+        {
+          credentials: "include",
+        }
       );
       const res = await req.json();
       if (res.succes) setCategory(res.category);
@@ -79,6 +82,7 @@ const ModalProduct = (props) => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(product),
         }
       );
@@ -112,6 +116,7 @@ const ModalProduct = (props) => {
         "https://ecommerce-coolmate-server-production.up.railway.app/upload",
         {
           method: "POST",
+          credentials: "include",
           body: formData,
         }
       );

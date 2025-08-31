@@ -38,7 +38,10 @@ const ProductDetail = () => {
   const fetchRating = async () => {
     try {
       const req = await fetch(
-        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/rating/${id}`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/rating/${id}`,
+        {
+          credentials: "include",
+        }
       );
       const res = await req.json();
       if (res.succes) {
@@ -56,11 +59,17 @@ const ProductDetail = () => {
   const fetchProduct = async () => {
     try {
       const req1 = await fetch(
-        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/product/${id}`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/product/${id}`,
+        {
+          credentials: "include",
+        }
       );
       const res1 = await req1.json();
       const req2 = await fetch(
-        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/product/${id}/detail`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/customer/product/${id}/detail`,
+        {
+          credentials: "include",
+        }
       );
       const res2 = await req2.json();
       if (res1.succes && res2.succes) {
@@ -81,7 +90,10 @@ const ProductDetail = () => {
   const fetchCategory = async () => {
     try {
       const req = await fetch(
-        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category`,
+        {
+          credentials: "include",
+        }
       );
       const res = await req.json();
       if (res.succes) setCategory(res.category);
@@ -177,6 +189,7 @@ const ProductDetail = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(product),
+          credentials: "include",
         }
       );
 
@@ -211,6 +224,7 @@ const ProductDetail = () => {
         {
           method: "POST",
           body: formData,
+          credentials: "include",
         }
       );
 

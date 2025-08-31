@@ -77,7 +77,10 @@ const ListProvider = () => {
     event.stopPropagation();
     try {
       const response = await axios.delete(
-        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/provider/${row.id}`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/provider/${row.id}`,
+        {
+          withCredentials: true,
+        }
       );
       if (response.data.succes) {
         fetchProviders();

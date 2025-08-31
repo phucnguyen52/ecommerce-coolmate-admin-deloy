@@ -16,7 +16,10 @@ const CreateVoucher = () => {
   const fetchCategory = async () => {
     try {
       const req = await fetch(
-        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/category`,
+        {
+          credentials: "include",
+        }
       );
       const res = await req.json();
       if (res.succes) {
@@ -29,7 +32,10 @@ const CreateVoucher = () => {
   const fetchUser = async (search) => {
     try {
       const req = await fetch(
-        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/user/search?search=${search}`
+        `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/user/search?search=${search}`,
+        {
+          credentials: "include",
+        }
       );
       const res = await req.json();
       if (res.success) {

@@ -56,6 +56,7 @@ const ModalCategory = (props) => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(category),
         }
       );
@@ -88,6 +89,7 @@ const ModalCategory = (props) => {
         {
           method: "POST",
           body: formData,
+          credentials: "include",
         }
       );
       const data = await response.json();
