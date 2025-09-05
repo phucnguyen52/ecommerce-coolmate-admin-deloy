@@ -24,9 +24,6 @@ function Login() {
           {
             email: email,
             password: password,
-          },
-          {
-            withCredentials: true,
           }
         );
 
@@ -36,12 +33,12 @@ function Login() {
           (response.data.role === "manager" ||
             response.data.role === "employee")
         ) {
-          Cookies.set("token", response.data.token);
+          localStorage.setItem("token", response.data.token);
           toast.success("Đăng nhập thành công");
           navigate("/report-category");
         } else {
           console.error("Đăng nhập không thành công");
-          toast.error("Bạn không phải là nhân viên hay quán lý");
+          toast.error("Bạn không phải là nhân viên hay quản lý");
         }
       } catch (error) {
         setErrors(error.response.data.message);

@@ -5,6 +5,7 @@ import { FaWindowClose } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const StoreReceipt = () => {
+  const token = localStorage.getItem("token"); // lấy token mới nhất
   const [data, setData] = useState([]);
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [provider, setProvider] = useState([]);
@@ -350,7 +351,15 @@ const StoreReceipt = () => {
         )}
         <div className="flex flex-col items-start">
           <button
-            onClick={() => setIsModalVisible(true)}
+            onClick={() => {
+              if (!token) {
+                toast.error("Bạn cần đăng nhập để xác nhận đơn hàng!", {
+                  autoClose: 1500,
+                });
+                return; // dừng không cho gọi API
+              }
+              setIsModalVisible(true);
+            }}
             className="max-w-60 cursor-pointer flex gap-2 items-center text-nowrap text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
           >
             <div>
@@ -395,7 +404,15 @@ const StoreReceipt = () => {
       </div>
       <div className="flex items-center justify-center mt-4">
         <button
-          onClick={handleStoreProduct}
+          onClick={() => {
+            if (!token) {
+              toast.error("Bạn cần đăng nhập để xác nhận đơn hàng!", {
+                autoClose: 1500,
+              });
+              return; // dừng không cho gọi API
+            }
+            handleStoreProduct();
+          }}
           className=" min-w-52 cursor-pointer text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
         >
           Nhập kho

@@ -351,7 +351,7 @@ const ModalAdd = ({
           </div>
         </div>
       )}
-      <div className="border-blueGray-200 flex items-center justify-end rounded-b border-t border-solid p-6">
+      <div className=" flex items-center justify-end rounded-b border-t border-solid p-6">
         <button
           className="mb-1 mr-1 rounded bg-emerald-500 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none active:bg-emerald-600"
           type="button"

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import ModalProduct from "../../components/Product/ModalProduct";
 
 const ListProduct = () => {
+  const token = localStorage.getItem("token");
   const [openCreate, setOpenCreate] = useState(false);
   const columns = [
     { key: "id", label: "Mã SP" },
@@ -72,6 +73,13 @@ const ListProduct = () => {
 
   const handleDelete = async (event, row) => {
     event.stopPropagation();
+
+    if (!token) {
+      toast.error("Bạn cần đăng nhập để thực hiện chức năng này!", {
+        autoClose: 1500,
+      });
+      return; // dừng không cho gọi API
+    }
     try {
       const response = await axios.delete(
         `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/product/${row.id}`,

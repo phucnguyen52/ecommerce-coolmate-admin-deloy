@@ -11,6 +11,7 @@ const ListCategory = () => {
   const [openUpdate, setOpenUpdate] = useState(false);
   const [openCreate, setOpenCreate] = useState(false);
   const [dataRow, setDataRow] = useState(null);
+  const token = localStorage.getItem("token"); // lấy token mới nhất
   const columns = [
     { key: "id", label: "Mã Loại" },
     { key: "categoryName", label: "Tên Loại" },
@@ -31,6 +32,12 @@ const ListCategory = () => {
       render: (row) => (
         <button
           onClick={() => {
+            if (!token) {
+              toast.error("Bạn cần đăng nhập để xác nhận đơn hàng!", {
+                autoClose: 1500,
+              });
+              return; // dừng không cho gọi API
+            }
             setDataRow(row);
             setOpenUpdate(true);
           }}
@@ -45,7 +52,15 @@ const ListCategory = () => {
       label: "Xóa",
       render: (row) => (
         <button
-          onClick={(event) => handleDelete(event, row)}
+          onClick={(event) => {
+            if (!token) {
+              toast.error("Bạn cần đăng nhập để xác nhận đơn hàng!", {
+                autoClose: 1500,
+              });
+              return; // dừng không cho gọi API
+            }
+            handleDelete(event, row);
+          }}
           className="mx-auto flex p-2 hover:bg-gray-200 hover:rounded-full"
         >
           <MdDeleteForever className="w-5 h-5" />

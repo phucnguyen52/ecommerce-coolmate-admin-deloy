@@ -17,7 +17,18 @@ const ListUser = () => {
       label: "Đặt lại mật khẩu",
       render: (row) => (
         <button
-          onClick={(event) => handleResetPassword(event, row)}
+          onClick={(event) => {
+            event.stopPropagation();
+            const token = localStorage.getItem("token"); // lấy token mới nhất
+
+            if (!token) {
+              toast.error("Bạn cần đăng nhập để xác nhận đơn hàng!", {
+                autoClose: 1500,
+              });
+              return; // dừng không cho gọi API
+            }
+            handleResetPassword(event, row);
+          }}
           className="z-10 text-center mx-auto p-2 hover:bg-slate-200 hover:rounded-md"
         >
           <MdLockReset className="h-6 w-6" />

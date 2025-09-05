@@ -9,29 +9,18 @@ import {
   AppstoreOutlined,
   UserOutlined,
   ShoppingCartOutlined,
-  ShopOutlined,
   TeamOutlined,
   SolutionOutlined,
   LogoutOutlined,
-  HomeOutlined,
   ProductOutlined,
   ImportOutlined,
   PercentageOutlined,
   SisternodeOutlined,
-  DollarOutlined,
-  FileSyncOutlined,
-  PlusCircleOutlined,
-  MinusCircleOutlined,
-  CarOutlined,
   ContainerOutlined,
-  BarChartOutlined,
   InboxOutlined,
-  WalletOutlined,
-  LineChartOutlined,
-  FundOutlined,
-  CommentOutlined,
   DiffOutlined,
   DeploymentUnitOutlined,
+  LoginOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import ToggleThemeButton from "../../components/ToggleTheme/ToggleThemeButton";
@@ -47,7 +36,7 @@ function getItem(label, key, icon, children) {
   };
 }
 function MainLayout() {
-  const token = Cookies.get("token");
+  const token = localStorage.getItem("token");
   const [darkTheme, setDarkTheme] = useState(false);
   const toggleTheme = () => {
     setDarkTheme((darkTheme) => !darkTheme);
@@ -57,11 +46,6 @@ function MainLayout() {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   const items = [
-    // getItem(
-    //     <Link to={APP_ROUTER.HOME}>Trang chủ</Link>,
-    //     "1",
-    //     <HomeOutlined />
-    // ),
     getItem("Quản lý", "sub1", <AppstoreOutlined />, [
       getItem(
         <Link to={APP_ROUTER.REPORTS}>Tổng quan</Link>,
@@ -88,11 +72,7 @@ function MainLayout() {
         "21",
         <DiffOutlined />
       ),
-      // getItem(
-      //   <Link to={APP_ROUTER.WAREHOUSE_PRODUCT}>Kho hàng</Link>,
-      //   "6",
-      //   <ShopOutlined />
-      // ),
+
       getItem(
         <Link to={APP_ROUTER.VOUCHER}>Khuyến mãi</Link>,
         "7",
@@ -120,81 +100,33 @@ function MainLayout() {
         "9",
         <SisternodeOutlined />
       ),
-
-      // getItem(
-      //   <Link to={token ? APP_ROUTER.CHAT : APP_ROUTER.HOME}>
-      //     Tư vấn khách hàng
-      //   </Link>,
-      //   "24",
-      //   <CommentOutlined />
-      // ),
     ]),
-    // getItem("Tiền bạc", "sub3", <DollarOutlined />, [
-    //     getItem(
-    //         <Link to={APP_ROUTER.ADD_PRODUCT}>Tổng quan</Link>,
-    //         "11",
-    //         <FileSyncOutlined />
-    //     ),
-    //     getItem(
-    //         <Link to={APP_ROUTER.PRODUCT}>Thu</Link>,
-    //         "12",
-    //         <PlusCircleOutlined />
-    //     ),
-    //     getItem(
-    //         <Link to={APP_ROUTER.PRODUCT}>Chi</Link>,
-    //         "13",
-    //         <MinusCircleOutlined />
-    //     ),
-    // ]),
-    // getItem(
-    //     <Link to={APP_ROUTER.NEEDS_COLLECTIONS}>Bán hàng Online</Link>,
-    //     "14",
-    //     <CarOutlined />
-    // ),
+
     getItem("Báo cáo", "sub4", <ContainerOutlined />, [
-      // getItem(
-      //     <Link to={APP_ROUTER.REPORT_CATEGORY}>Doanh số</Link>,
-      //     "15",
-      //     <FundOutlined />
-      // ),
       getItem(
         <Link to={APP_ROUTER.REPORT_CATEGORY}>Hàng hóa</Link>,
         "16",
         <InboxOutlined />
       ),
-      // getItem(
-      //     <Link to={APP_ROUTER.ADD_STORE}>Tồn kho</Link>,
-      //     "17",
-      //     <WalletOutlined />
-      // ),
-      // getItem(
-      //     <Link to={APP_ROUTER.STORE}>Lợi nhuận</Link>,
-      //     "18",
-      //     <LineChartOutlined />
-      // ),
-      // getItem(
-      //     <Link to={APP_ROUTER.STORE}>Báo cáo tháng</Link>,
-      //     "19",
-      //     <BarChartOutlined />
-      // ),
     ]),
-    // getItem("Đơn hàng", "sub3", <ShoppingCartOutlined />, [
-    //     getItem(<Link to={"/order/1"}>Đang chờ xác nhận</Link>, "8"),
-    //     getItem(<Link to={"/order/2"}>Đang chờ vận chuyển</Link>, "9"),
-    //     getItem(<Link to={"/order/3"}>Đang giao hàng</Link>, "10"),
-    //     getItem(<Link to={"/order/4"}>Đã giao</Link>, "11"),
-    // ]),
-    // getItem(
-    //     <Link to={APP_ROUTER.LISTUSER}>Người dùng</Link>,
-    //     "12",
-    //     <TeamOutlined />
-    // ),
-    getItem(
-      <Link to={APP_ROUTER.LOGOUT}>Đăng xuất</Link>,
-      "20",
-      <LogoutOutlined />
-    ),
   ];
+  if (token) {
+    items.push(
+      getItem(
+        <Link to={APP_ROUTER.LOGOUT}>Đăng xuất</Link>,
+        "20",
+        <LogoutOutlined />
+      )
+    );
+  } else {
+    items.push(
+      getItem(
+        <Link to={APP_ROUTER.LOGIN}>Đăng nhập</Link>,
+        "25",
+        <LoginOutlined />
+      )
+    );
+  }
   return (
     <>
       <div className="mx-auto w-full" style={{ maxWidth: "100vw" }}>

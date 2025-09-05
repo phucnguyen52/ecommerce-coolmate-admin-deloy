@@ -18,18 +18,6 @@ const ListStore = () => {
     { key: "provider", label: "Nhà cung cấp", isFilterable: true },
 
     { key: "total_price", label: "Tổng tiền" },
-    {
-      key: "button",
-      label: "In",
-      render: (row) => (
-        <button
-          onClick={() => handlePrint(row)}
-          className="z-10 text-center mx-auto"
-        >
-          <AiFillPrinter className="h-4 w-4" />
-        </button>
-      ),
-    },
   ];
   const today = new Date().toISOString().split("T")[0];
   const sevenDaysAgo = new Date();
@@ -38,13 +26,16 @@ const ListStore = () => {
   const [startDate, setStartDate] = useState(defaultStartDate); // Ngày bắt đầu
   const [endDate, setEndDate] = useState(today);
   const [data, setData] = useState([]);
+  const token = localStorage.getItem("token");
   const fetchStores = async (startDate, endDate) => {
     if (startDate && endDate) {
       try {
         const response = await axios.get(
           `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/store?start='${startDate}'&end='${endDate}'`,
           {
-            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
 
@@ -74,8 +65,6 @@ const ListStore = () => {
   const handleIsFilters = () => {
     setExpandedRow([]);
   };
-
-  const handlePrint = (row) => {};
 
   const handlePageChange = () => {
     setExpandedRow([]);

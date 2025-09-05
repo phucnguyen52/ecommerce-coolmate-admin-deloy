@@ -3,6 +3,7 @@ import { MdAddBox } from "react-icons/md";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { format } from "date-fns";
 import "./customStyles.css";
+import { toast } from "react-toastify";
 const Table = ({
   columns,
   data,
@@ -197,7 +198,16 @@ const Table = ({
           )}
           {contentButton && (
             <button
-              onClick={handleAdd}
+              onClick={() => {
+                const token = localStorage.getItem("token"); // lấy token mới nhất
+                if (!token) {
+                  toast.error("Bạn cần đăng nhập để thực hiện chức năng này!", {
+                    autoClose: 1500,
+                  });
+                  return; // dừng không cho gọi handleAdd
+                }
+                handleAdd(); // chỉ gọi nếu có token
+              }}
               className="cursor-pointer flex gap-2 items-center text-nowrap rounded-md bg-gradient-to-tr mr-3 from-slate-800 to-slate-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             >
               <div>
@@ -218,39 +228,6 @@ const Table = ({
         <table className="min-w-full table-auto rounded-b-xl">
           <thead className="bg-gray-50 sticky top-0 z-10">
             <tr>
-              <th className="text-left pl-2 border-b">
-                <div className="inline-flex items-center">
-                  <label
-                    className="relative flex cursor-pointer items-center rounded-full p-3"
-                    htmlFor="ripple-all"
-                    data-ripple-dark="true"
-                  >
-                    <input
-                      id="ripple-all"
-                      type="checkbox"
-                      checked={isCheckAll}
-                      onChange={handleCheckAll}
-                      className="peer relative h-5 w-5 cursor-pointer appearance-none rounded border border-slate-300 shadow hover:shadow-md transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-slate-400 before:opacity-0 before:transition-opacity checked:border-slate-800 checked:bg-slate-800 checked:before:bg-slate-400 hover:before:opacity-10"
-                    />
-                    <span className="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-              </th>
               {columns.map((column) => (
                 <th
                   key={column.key}
@@ -258,7 +235,8 @@ const Table = ({
                     column.key === "id" ||
                     column.key === "button" ||
                     column.key === "hinh" ||
-                    column.key === "total_quantity"
+                    column.key === "total_quantity" ||
+                    column.key === "order_id"
                       ? "text-center"
                       : "text-left px-4 py-5"
                   } border-b`}
@@ -298,41 +276,6 @@ const Table = ({
                   onClick={() => onRowClick && onRowClick(index)}
                   className="cursor-pointer border-b overflow-y-auto p-2"
                 >
-                  <td className="pl-2">
-                    <div className="inline-flex items-center">
-                      <label
-                        className="relative flex cursor-pointer items-center rounded-full p-3"
-                        htmlFor={`ripple-${index}`}
-                        data-ripple-dark="true"
-                      >
-                        <input
-                          id={`ripple-${index}`}
-                          type="checkbox"
-                          className="peer relative h-5 w-5 cursor-pointer appearance-none rounded border border-slate-300 shadow hover:shadow-md transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-slate-400 before:opacity-0 before:transition-opacity checked:border-slate-800 checked:bg-slate-800 checked:before:bg-slate-400 hover:before:opacity-10"
-                          checked={selectedRows.includes(index)}
-                          onChange={() => handleCheckRow(index)}
-                          onClick={(e) => e.stopPropagation()}
-                        />
-                        <span className="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-3.5 w-3.5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            stroke="currentColor"
-                            strokeWidth="1"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            ></path>
-                          </svg>
-                        </span>
-                      </label>
-                    </div>
-                  </td>
-
                   {columns.map((column) => (
                     <td
                       key={column.key}
@@ -342,7 +285,11 @@ const Table = ({
                         column.key === "price" ||
                         column.key === "discount" ||
                         column.key === "button" ||
-                        column.key === "total_quantity"
+                        column.key === "total_quantity" ||
+                        column.key === "order_id" ||
+                        column.key === "quantity" ||
+                        column.key === "total" ||
+                        column.key === "remainingQuantity"
                           ? "px-4 py-2 text-center"
                           : "px-4 py-2"
                       }`}

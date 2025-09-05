@@ -2,6 +2,7 @@ import axios from "axios";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Voucher = () => {
   const [data, setData] = useState();
   const [status, setStatus] = useState();
@@ -28,7 +29,7 @@ const Voucher = () => {
   useEffect(() => {
     fetchVoucher();
   }, []);
-
+  const token = localStorage.getItem("token");
   const handleRowClick = (voucher) => {
     setSelectedVoucher(voucher); // Cập nhật voucher đã chọn
   };
@@ -62,7 +63,15 @@ const Voucher = () => {
         <div className="text-2xl font-bold text-cyan-600 ">Mã giảm giá</div>
         <div className="absolute top-4 right-4 flex gap-5">
           <button
-            onClick={() => navigate("/create-voucher")}
+            onClick={() => {
+              if (!token) {
+                toast.error("Bạn cần đăng nhập để xác nhận đơn hàng!", {
+                  autoClose: 1500,
+                });
+                return; // dừng không cho gọi API
+              }
+              navigate("/create-voucher");
+            }}
             className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
           >
             Thêm mới

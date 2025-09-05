@@ -34,7 +34,7 @@ const ListProvider = () => {
   useEffect(() => {
     fetchProviders();
   }, [data]);
-
+  const token = localStorage.getItem("token"); // lấy token mới nhấts
   const columns = [
     { key: "id", label: "ID" },
     { key: "fullname", label: "Tên nhà cung cấp" },
@@ -48,6 +48,12 @@ const ListProvider = () => {
           onClick={(event) => {
             event.stopPropagation();
 
+            if (!token) {
+              toast.error("Bạn cần đăng nhập để xác nhận đơn hàng!", {
+                autoClose: 1500,
+              });
+              return; // dừng không cho gọi API
+            }
             setDataRow(row);
             setOpenUpdate(true);
           }}
@@ -62,7 +68,16 @@ const ListProvider = () => {
       label: "Xóa",
       render: (row) => (
         <button
-          onClick={(event) => handleDelete(event, row)}
+          onClick={(event) => {
+            event.stopPropagation();
+            if (!token) {
+              toast.error("Bạn cần đăng nhập để xác nhận đơn hàng!", {
+                autoClose: 1500,
+              });
+              return; // dừng không cho gọi API
+            }
+            handleDelete(event, row);
+          }}
           className="mx-auto flex p-2 hover:bg-gray-200 hover:rounded-full"
         >
           <MdDeleteForever className="w-5 h-5" />

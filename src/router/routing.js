@@ -27,8 +27,8 @@ const router = createBrowserRouter([
   {
     path: "/",
     loader: () => {
-      if (!localStorage.getItem("user")) {
-        throw redirect(APP_ROUTER.LOGIN);
+      if (!localStorage.getItem("token")) {
+        throw redirect(APP_ROUTER.REPORTS);
       }
       return null;
     },

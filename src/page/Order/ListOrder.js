@@ -15,18 +15,6 @@ const ListOrder = () => {
     { key: "customer_name", label: "Khách hàng" },
     { key: "statusOrder", label: "Trạng thái", isFilterable: true },
     { key: "total_amount", label: "Tổng tiền" },
-    {
-      key: "button",
-      label: "In",
-      render: (row) => (
-        <button
-          onClick={() => handlePrint(row)}
-          className="z-10 text-center mx-auto"
-        >
-          <AiFillPrinter className=" h-4 w-4" />
-        </button>
-      ),
-    },
   ];
   const today = new Date().toISOString().split("T")[0];
   const sevenDaysAgo = new Date();
@@ -35,14 +23,16 @@ const ListOrder = () => {
   const [startDate, setStartDate] = useState(defaultStartDate);
   const [endDate, setEndDate] = useState(today);
   const [data, setData] = useState([]);
-
+  const token = localStorage.getItem("token");
   const fetchData = async (startDate, endDate) => {
     if (startDate && endDate) {
       try {
         const response = await axios.get(
           `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/order?start='${startDate}'&end='${endDate}'`,
           {
-            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
         if (response.status === 200) {
@@ -76,6 +66,14 @@ const ListOrder = () => {
     setExpandedRow([]);
   };
   const handelUpdate = async (row) => {
+    const token = localStorage.getItem("token"); // lấy token mới nhất
+
+    if (!token) {
+      toast.error("Bạn cần đăng nhập để xác nhận trạng thái đơn hàng!", {
+        autoClose: 1500,
+      });
+      return; // dừng không cho gọi API
+    }
     let statusOrderId;
 
     switch (row.statusOrder) {

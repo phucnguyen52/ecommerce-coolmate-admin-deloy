@@ -18,7 +18,7 @@ const Category = () => {
     .split("T")[0];
   const [startDate, setStartDate] = useState(startOfYear);
   const [endDate, setEndDate] = useState(today);
-
+  const token = localStorage.getItem("token");
   // Hàm fetch dữ liệu từ API
   const fetchData = async (startDate, endDate) => {
     if (startDate && endDate) {
@@ -26,7 +26,9 @@ const Category = () => {
         const response = await axios.get(
           `https://ecommerce-coolmate-server-production.up.railway.app/api/admin/report/category?start='${startDate}'&end='${endDate}'`,
           {
-            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
 
